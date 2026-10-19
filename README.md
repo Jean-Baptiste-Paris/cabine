@@ -2,7 +2,7 @@
 
 SPA personnel pour composer des tenues sur un avatar SVG, à la manière d'un écran de création de personnage, à partir des pièces réelles du vestiaire.
 
-Site déployé : https://<mon-user>.github.io/cabine/
+Site déployé : https://jean-baptiste-paris.github.io/cabine/
 
 ## Stack
 
