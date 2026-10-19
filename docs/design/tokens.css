@@ -1,0 +1,62 @@
+/* Cabine — tokens CSS (direction D « Salon × Atelier »). Voir DESIGN.md §1.
+   Polices : https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap
+
+   Tailwind v4 : importer ce fichier après `@import "tailwindcss";` — le bloc @theme crée à la fois
+   les variables CSS (:root) et les utilitaires (bg-paper, text-accent, border-rule, font-display,
+   rounded-control, bg-tint-camel…).
+   Sans Tailwind (ou Tailwind v3) : remplacer `@theme` par `:root` ; en v3, reprendre les valeurs
+   dans theme.extend de tailwind.config.js. */
+
+@theme {
+  --color-paper: #F3EBDD;
+  --color-surface: #FBF6EC;
+  --color-surface-sunk: #EADFCB;
+  --color-halo: #EDE3D1;
+  --color-plinth: #DDD0BA;
+  --color-rule: #DDD0BA;
+  --color-rule-soft: #E6DBC6;
+  --color-border: #CDBEA5;
+  --color-border-dashed: #A8977C;
+  --color-ink: #2A211C;
+  --color-muted: #6B5D52;
+  --color-accent: #6E1F2B;
+  --color-accent-hover: #4F141E;
+  --color-on-accent: #FBF6EC;
+  --color-success-bg: #E3E6D6;
+  --color-success: #2F4A3A;
+  --color-danger-bg: #F1DEDF;
+  --color-danger-border: #D9B9BD;
+  --color-disabled-bg: #E6DBC6;
+  --color-scrim: rgba(42, 33, 28, 0.42);
+  --color-mannequin: #E4D9C5;
+  --color-mannequin-line: #2A211C;
+
+  /* Teintes des pièces (liste fermée de 14) */
+  --color-tint-ecru: #E9DFC7;
+  --color-tint-camel: #B5884F;
+  --color-tint-moutarde: #C29A3A;
+  --color-tint-terracotta: #C0704F;
+  --color-tint-rouille: #A4532B;
+  --color-tint-bordeaux: #6E2230;
+  --color-tint-marron: #6B4A33;
+  --color-tint-sauge: #9AA58A;
+  --color-tint-olive: #6F6B3A;
+  --color-tint-vert-foret: #2F4A3A;
+  --color-tint-bleu-petrole: #2E5560;
+  --color-tint-marine: #26324A;
+  --color-tint-gris-flanelle: #8A8780;
+  --color-tint-anthracite: #3A3A3C;
+
+  --font-display: 'Libre Caslon Text', Georgia, serif;
+  --font-ui: 'Figtree', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --radius-segment: 8px;
+  --radius-control: 12px;
+  --radius-card: 14px;
+  --radius-card-lg: 16px;
+  --radius-dialog: 18px;
+  --radius-sheet: 22px;
+
+  --breakpoint-tablet: 48rem; /* 768px : tiroir → panneau latéral, rail vertical */
+}

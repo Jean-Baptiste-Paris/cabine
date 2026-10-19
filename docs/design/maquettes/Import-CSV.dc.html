@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cabine · Import CSV</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Figtree:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#6E1F2B}a:hover{color:#4F141E}
+button{cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3EBDD; color: #2A211C; font-family: 'Figtree', sans-serif; display: flex; flex-direction: column">
+
+<header style="display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; padding: 12px 8px 0">
+<a href="Catalogue.dc.html" aria-label="Retour au catalogue" style="width: 44px; height: 44px; border-radius: 22px; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</a>
+<div style="display: flex; flex-direction: column; align-items: center">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.28em; color: #6E1F2B; padding-left: 0.28em">IMPORT CSV</span>
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 12px; font-style: italic; color: #6B5D52; margin-top: 2px">Étape 1 sur 2 · Fichier</span>
+</div>
+<span></span>
+</header>
+
+<div style="flex: 1; min-height: 0; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 18px">
+
+<sc-if value="{{empty}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 36px 20px 28px; border: 1.5px dashed #A8977C; border-radius: 18px; background: #FBF6EC; text-align: center">
+<span style="width: 64px; height: 64px; border-radius: 32px; background: #EADFCB; color: #6E1F2B; display: flex; align-items: center; justify-content: center">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5M9 13h6M9 17h4"></path></svg>
+</span>
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 20px">Choisir un fichier .csv</span>
+<span style="font-size: 13.5px; color: #6B5D52; line-height: 1.5; max-width: 260px">Une ligne par pièce. Les pièces dont le code existe déjà sont mises à jour.</span>
+<button onClick="{{pick}}" style="margin-top: 6px; height: 48px; padding: 0 22px; border: 0; border-radius: 12px; background: #6E1F2B; color: #FBF6EC; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600">Parcourir les fichiers</button>
+</div>
+</sc-if>
+
+<sc-if value="{{chosen}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #DDD0BA; border-radius: 18px; background: #FBF6EC">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 10px; background: #EADFCB; color: #6E1F2B; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg>
+</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">garde-robe.csv</span>
+<span style="font-size: 12.5px; color: #6B5D52">38 lignes détectées · séparateur « ; »</span>
+</div>
+<button onClick="{{reset}}" aria-label="Retirer le fichier" style="width: 44px; height: 44px; border: 0; border-radius: 22px; background: transparent; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+<div style="height: 1px; background: #E6DBC6"></div>
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B5D52">Aperçu des premières lignes</span>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.7; color: #2A211C; background: #F3EBDD; border-radius: 8px; padding: 10px; overflow-x: auto; white-space: pre">MAI-01;Pull torsadé bordeaux;maille;…
+VES-01;Blouson daim marron;veste;…
+PAN-03;Flanelle grise;pantalon;…</div>
+</div>
+</sc-if>
+
+<section style="display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-family: 'Libre Caslon Text', serif; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #6E1F2B">Format attendu</h2>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; line-height: 1.6; color: #2A211C; background: #FBF6EC; border: 1px solid #DDD0BA; border-radius: 10px; padding: 12px; word-break: break-all">code;nom;emplacement;forme;teinte;matiere;tags;notes</div>
+<ul style="margin: 0; padding: 0 0 0 18px; font-size: 13.5px; line-height: 1.6; color: #2A211C">
+<li><strong>emplacement</strong> : l'un des 12 (haut, maille, veste…).</li>
+<li><strong>teinte</strong> : l'une des 14 teintes de la liste.</li>
+<li><strong>tags</strong> : séparés par des virgules.</li>
+<li>Seuls <strong>nom</strong> et <strong>emplacement</strong> sont obligatoires.</li>
+</ul>
+</section>
+</div>
+
+<div style="padding: 10px 16px 20px; border-top: 1px solid #DDD0BA">
+<sc-if value="{{chosen}}" hint-placeholder-val="{{ false }}">
+<a href="Import-rapport.dc.html" style="height: 52px; border-radius: 12px; background: #6E1F2B; color: #FBF6EC; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; text-decoration: none">Lancer l'import</a>
+</sc-if>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ true }}">
+<div style="height: 52px; border-radius: 12px; background: #E6DBC6; color: #6B5D52; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600" aria-disabled="true">Lancer l'import</div>
+</sc-if>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  state = { file: false };
+  renderVals() {
+    return {
+      empty: !this.state.file, chosen: this.state.file,
+      pick: () => this.setState({ file: true }), reset: () => this.setState({ file: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

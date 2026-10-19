@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 460" width="200" height="460" role="img" aria-label="Avatar portant : veste, maille, haut, pantalon, chaussures">
+<!--
+  Cabine — avatar de référence (voir DESIGN.md §4).
+  - Un <g id="…"> par calque, dans l'ordre d'empilement (fond → avant).
+  - data-slot = emplacement qui pilote le calque ; masquer le calque (display="none") quand l'emplacement vaut « Aucun ».
+  - Les fill ci-dessous sont la tenue d'exemple ; l'application remplace chaque fill par le hex de la teinte de la pièce.
+  - Les variantes (data-variant) s'excluent : n'en afficher qu'une selon l'état de port.
+  - Contour : stroke = mannequin-line, 1.2–1.3 px à 390 px de large d'écran (vector-effect possible).
+-->
+<g stroke="#2A211C" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round">
+
+  <g id="arms" fill="#E4D9C5">
+    <path d="M44 96 Q33 104 31 124 L24 210 L40 212 L50 140 Z"/>
+    <path d="M156 96 Q167 104 169 124 L176 210 L160 212 L150 140 Z"/>
+  </g>
+  <g id="hands" fill="#E4D9C5">
+    <ellipse cx="32" cy="222" rx="8" ry="12"/>
+    <ellipse cx="168" cy="222" rx="8" ry="12"/>
+  </g>
+  <rect id="neck" x="91" y="52" width="18" height="34" fill="#E4D9C5"/>
+  <ellipse id="head" cx="100" cy="36" rx="18" ry="23" fill="#E4D9C5"/>
+
+  <!-- Chaussettes ; si aucune : afficher #ankles (peau) à la place -->
+  <path id="socks" data-slot="chaussettes" fill="#6E2230" d="M66 404 L92 404 L92 418 L66 418 Z M108 404 L134 404 L134 418 L108 418 Z"/>
+  <path id="ankles" display="none" fill="#E4D9C5" d="M60 404 L92 404 L92 416 L60 416 Z M108 404 L140 404 L140 416 L108 416 Z"/>
+
+  <path id="pants" data-slot="pantalon" fill="#26324A" d="M54 210 L146 210 L150 300 L140 406 L108 406 L101 266 L99 266 L92 406 L60 406 L50 300 Z"/>
+
+  <path id="shoes" data-slot="chaussures" fill="#6B4A33" d="M58 414 L92 414 Q96 414 96 420 L96 428 Q96 432 92 432 L50 432 Q44 432 46 426 Q48 418 58 414 Z M142 414 L108 414 Q104 414 104 420 L104 428 Q104 432 108 432 L150 432 Q156 432 154 426 Q152 418 142 414 Z"/>
+
+  <g id="top" data-slot="haut" fill="#E9DFC7">
+    <path d="M58 84 Q100 74 142 84 L156 94 Q161 122 152 152 L148 216 L52 216 L48 152 Q39 122 44 94 Z"/>
+    <path data-variant="sleeves-down" d="M44 94 Q31 100 30 122 L23 206 L41 208 L50 142 Z"/>
+    <path data-variant="sleeves-down" d="M156 94 Q169 100 170 122 L177 206 L159 208 L150 142 Z"/>
+    <path data-variant="sleeves-rolled" display="none" d="M44 94 Q31 100 30 122 L27 168 L45 170 L50 142 Z"/>
+    <path data-variant="sleeves-rolled" display="none" d="M156 94 Q169 100 170 122 L173 168 L155 170 L150 142 Z"/>
+  </g>
+
+  <!-- Pan de chemise sorti : haut porté ET topOut -->
+  <path id="top-hem-out" data-slot="haut" display="none" fill="#E9DFC7" d="M50 206 L150 206 L152 236 Q100 242 48 236 Z"/>
+
+  <!-- Ceinture sous la maille : ceinture ET pas de maille ET pas (haut sorti) -->
+  <g id="belt-under" data-slot="ceinture" display="none">
+    <rect x="52" y="204" width="96" height="11" fill="#6B4A33"/>
+    <rect x="95" y="205" width="10" height="9" fill="none"/>
+  </g>
+
+  <g id="knit" data-slot="maille" fill="#6E2230">
+    <path data-variant="knit-out" d="M56 86 Q100 78 144 86 L158 96 Q163 124 154 154 L151 232 Q100 238 49 232 L46 154 Q37 124 42 96 Z"/>
+    <path data-variant="knit-in" display="none" d="M56 86 Q100 78 144 86 L158 96 Q163 124 154 154 L150 214 L50 214 L46 154 Q37 124 42 96 Z"/>
+    <path data-variant="sleeves-down" d="M42 96 Q30 102 29 124 L23 200 L41 202 L50 144 Z"/>
+    <path data-variant="sleeves-down" d="M158 96 Q170 102 171 124 L177 200 L159 202 L150 144 Z"/>
+    <path data-variant="sleeves-rolled" display="none" d="M42 96 Q30 102 29 124 L27 166 L45 168 L50 144 Z"/>
+    <path data-variant="sleeves-rolled" display="none" d="M158 96 Q170 102 171 124 L173 166 L155 168 L150 144 Z"/>
+    <!-- Empiècement en V : fill = teinte du haut, ou peau s'il n'y a pas de haut -->
+    <path id="knit-v" fill="#E9DFC7" d="M89 86 L100 118 L111 86 Z"/>
+  </g>
+
+  <!-- Ceinture par-dessus : ceinture ET maille portée ET maille rentrée -->
+  <g id="belt-over" data-slot="ceinture" display="none">
+    <rect x="52" y="204" width="96" height="11" fill="#6B4A33"/>
+    <rect x="95" y="205" width="10" height="9" fill="none"/>
+  </g>
+
+  <path id="collar" data-slot="haut" fill="#E9DFC7" d="M86 80 L100 96 L114 80 L118 90 L100 104 L82 90 Z"/>
+  <!-- Col ouvert : haut porté ET colOpen ET pas de cravate -->
+  <path id="neck-open" fill="#E4D9C5" d="M94 82 L100 96 L106 82 Z"/>
+
+  <g id="tie" data-slot="cravate" display="none" fill="#6E2230">
+    <path data-variant="tie-short" d="M97 94 L103 94 L105 102 L102 117 L98 117 L95 102 Z"/>
+    <path data-variant="tie-long" display="none" d="M97 94 L103 94 L106 104 L102 192 L100 197 L98 192 L94 104 Z"/>
+  </g>
+
+  <g id="jacket" data-slot="veste" fill="#B5884F">
+    <path d="M44 90 Q29 97 27 123 L21 204 L42 206 L50 146 Z"/>
+    <path d="M156 90 Q171 97 173 123 L179 204 L158 206 L150 146 Z"/>
+    <path d="M44 88 Q68 79 91 82 L100 128 L101 244 L50 244 L45 154 Q35 122 44 88 Z"/>
+    <path d="M156 88 Q132 79 109 82 L100 128 L100 244 L150 244 L155 154 Q165 122 156 88 Z"/>
+    <path fill="none" d="M91 82 L84 112 L100 128 M109 82 L116 112 L100 128"/>
+    <circle cx="100" cy="168" r="2.4" fill="#2A211C"/>
+    <circle cx="100" cy="198" r="2.4" fill="#2A211C"/>
+  </g>
+
+  <g id="coat" data-slot="manteau" display="none" fill="#B5884F">
+    <path d="M40 88 Q24 95 22 122 L16 212 L42 214 L50 148 Z"/>
+    <path d="M160 88 Q176 95 178 122 L184 212 L158 214 L150 148 Z"/>
+    <path d="M40 86 Q66 76 90 80 L100 124 L101 334 L44 334 L38 160 Q28 120 40 86 Z"/>
+    <path d="M160 86 Q134 76 110 80 L100 124 L100 334 L156 334 L162 160 Q172 120 160 86 Z"/>
+    <path fill="none" d="M90 80 L82 110 L100 124 M110 80 L118 110 L100 124"/>
+    <rect x="96" y="160" width="8" height="4" rx="2" fill="#2A211C"/>
+    <rect x="96" y="204" width="8" height="4" rx="2" fill="#2A211C"/>
+    <rect x="96" y="248" width="8" height="4" rx="2" fill="#2A211C"/>
+  </g>
+
+  <g id="scarf" data-slot="echarpe" fill="#2F4A3A">
+    <path d="M80 72 Q100 88 120 72 L125 86 Q100 106 75 86 Z"/>
+    <path d="M104 94 L119 91 L122 168 L107 170 Z"/>
+    <path fill="none" d="M109 170 L109 176 M114 169 L114 175 M119 168 L119 174"/>
+  </g>
+
+  <g id="glasses" data-slot="lunettes" fill="none">
+    <circle cx="93" cy="36" r="5.5"/>
+    <circle cx="107" cy="36" r="5.5"/>
+    <path d="M98.5 36 L101.5 36"/>
+  </g>
+
+  <rect id="watch" data-slot="montre" x="23" y="193" width="15" height="9" rx="2" fill="#B5884F"/>
+</g>
+</svg>

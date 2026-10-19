@@ -1,0 +1,62 @@
+/*
+ * Tokens d'interface, repris de docs/design/tokens.css (direction « Salon × Atelier »).
+ * Les teintes des pièces n'y figurent pas : elles sont définies une seule fois dans src/config/teintes.ts.
+ */
+:root {
+  --color-paper: #f3ebdd;
+  --color-surface: #fbf6ec;
+  --color-surface-sunk: #eadfcb;
+  --color-halo: #ede3d1;
+  --color-plinth: #ddd0ba;
+  --color-rule: #ddd0ba;
+  --color-rule-soft: #e6dbc6;
+  --color-border: #cdbea5;
+  --color-border-dashed: #a8977c;
+  --color-ink: #2a211c;
+  --color-muted: #6b5d52;
+  --color-accent: #6e1f2b;
+  --color-accent-hover: #4f141e;
+  --color-on-accent: #fbf6ec;
+  --color-success-bg: #e3e6d6;
+  --color-success: #2f4a3a;
+  --color-danger-bg: #f1dedf;
+  --color-danger-border: #d9b9bd;
+  --color-disabled-bg: #e6dbc6;
+  --color-scrim: rgb(42 33 28 / 42%);
+  --color-mannequin: #e4d9c5;
+  --color-mannequin-line: #2a211c;
+
+  --font-display: 'Libre Caslon Text', georgia, serif;
+  --font-ui: 'Figtree', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --radius-segment: 8px;
+  --radius-control: 12px;
+  --radius-card: 14px;
+  --radius-card-lg: 16px;
+  --radius-dialog: 18px;
+  --radius-sheet: 22px;
+
+  --size-touch-min: 44px;
+  --gutter: 16px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  -webkit-text-size-adjust: 100%;
+}

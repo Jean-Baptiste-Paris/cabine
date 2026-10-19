@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cabine · Composition (Salon × Atelier, mobile)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Figtree:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#6E1F2B}a:hover{color:#4F141E}
+button{cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3EBDD; color: #2A211C; font-family: 'Figtree', sans-serif; display: flex; flex-direction: column">
+
+<header style="display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; padding: 12px 8px 0">
+<button onClick="{{openMenu}}" aria-label="Menu" style="width: 44px; height: 44px; border: 0; border-radius: 22px; background: transparent; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"></path></svg>
+</button>
+<div style="display: flex; flex-direction: column; align-items: center">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.32em; color: #6E1F2B; padding-left: 0.32em">CABINE</span>
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 12px; font-style: italic; color: #6B5D52; margin-top: 2px">Composition · {{worn}}</span>
+</div>
+<a href="Tenues.dc.html" aria-label="Tenues sauvegardées" style="width: 44px; height: 44px; border-radius: 22px; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 6.5a2 2 0 1 1 2.6 1.9c-.4.1-.6.5-.6.9V10"></path><path d="M12 10l-9 6.2c-.6.4-.3 1.3.4 1.3h17.2c.7 0 1-.9.4-1.3L12 10z"></path></svg>
+</a>
+</header>
+
+<div style="display: flex; gap: 8px; padding: 10px 16px 4px; overflow-x: auto; align-items: center">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="3">
+<button onClick="{{c.remove}}" aria-label="Retirer le filtre {{c.label}}" style="display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 10px 0 12px; border: 1px solid #CDBEA5; border-radius: 17px; background: #FBF6EC; color: #2A211C; font-family: 'Figtree', sans-serif; font-size: 13px; font-weight: 500; white-space: nowrap; flex-shrink: 0">
+<sc-if value="{{c.dotShow}}" hint-placeholder-val="{{ false }}"><span style="width: 10px; height: 10px; border-radius: 5px; background: {{c.dot}}"></span></sc-if>
+{{c.label}}
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6B5D52" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</sc-for>
+<a href="Filtres.dc.html" aria-label="Ouvrir les filtres" style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px dashed #A8977C; border-radius: 17px; color: #6E1F2B; flex-shrink: 0">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>
+</a>
+</div>
+
+<div style="position: relative; height: 380px; flex-shrink: 0; margin-top: 4px">
+<div style="position: absolute; left: 50%; top: 24px; width: 300px; height: 300px; margin-left: -150px; border-radius: 50%; background: #EDE3D1; border: 1px solid #DDD0BA"></div>
+<div style="position: absolute; left: 50%; bottom: 8px; width: 150px; height: 18px; margin-left: -75px; border-radius: 50%; background: #DDD0BA"></div>
+<div style="position: absolute; left: 70px; right: 70px; top: {{focus.lineTop}}px; height: 0; border-top: 1px dashed #6E1F2B; opacity: 0.5"></div>
+<div style="position: absolute; left: 50%; top: 0; width: 166px; margin-left: -83px">
+<dc-import name="Avatar" w="166" h="380" coat="{{av.coat}}" jacket="{{av.jacket}}" knit="{{av.knit}}" top="{{av.top}}" pants="{{av.pants}}" shoes="{{av.shoes}}" scarf="{{av.scarf}}" belt="{{av.belt}}" tie="{{av.tie}}" watch="{{av.watch}}" glasses="{{av.glasses}}" socks="{{av.socks}}" top-out="{{av.topOut}}" knit-in="{{av.knitIn}}" rolled="{{av.rolled}}" col-open="{{av.colOpen}}" skin="#E4D9C5" line="#2A211C" sw="1.2" hint-size="166px,380px"></dc-import>
+</div>
+<button onClick="{{focus.prev}}" aria-label="{{focus.label}} : pièce précédente" style="position: absolute; left: 16px; top: {{focus.arrowTop}}px; width: 52px; height: 52px; border-radius: 26px; border: 1px solid #6E1F2B; background: #FBF6EC; color: #6E1F2B; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</button>
+<button onClick="{{focus.next}}" aria-label="{{focus.label}} : pièce suivante" style="position: absolute; right: 16px; top: {{focus.arrowTop}}px; width: 52px; height: 52px; border-radius: 26px; border: 1px solid #6E1F2B; background: #FBF6EC; color: #6E1F2B; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+</div>
+
+<div style="margin: 6px 16px 0; padding: 12px 12px 12px 14px; background: #FBF6EC; border: 1px solid #DDD0BA; border-radius: 16px; display: flex; align-items: center; gap: 12px">
+<span style="width: 40px; height: 40px; border-radius: 20px; flex-shrink: 0; border: 1px {{focus.border}} #6B5D52; background: {{focus.color}}"></span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #6B5D52">{{focus.label}} · {{focus.pos}}</span>
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 19px; line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{focus.name}}</span>
+<span style="font-size: 12px; color: #6B5D52; letter-spacing: 0.06em">{{focus.code}}</span>
+</div>
+<button onClick="{{focus.open}}" aria-label="Parcourir les pièces : {{focus.label}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDBEA5; border-radius: 12px; background: transparent; color: #2A211C; display: flex; align-items: center; gap: 6px; font-family: 'Figtree', sans-serif; font-size: 13px; font-weight: 500; flex-shrink: 0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"></rect><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"></rect><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"></rect><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"></rect></svg>
+Parcourir
+</button>
+</div>
+
+<sc-if value="{{hasStates}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; gap: 8px; padding: 10px 16px 0; overflow-x: auto">
+<sc-for list="{{states}}" as="st" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 2px; border: 1px solid #DDD0BA; border-radius: 10px; padding: 2px 2px 2px 8px; flex-shrink: 0">
+<span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #6B5D52; margin-right: 4px">{{st.label}}</span>
+<button onClick="{{st.pickA}}" style="height: 32px; padding: 0 9px; border: 0; border-radius: 8px; background: {{st.aBg}}; color: {{st.aFg}}; font-family: 'Figtree', sans-serif; font-size: 12.5px; font-weight: 500">{{st.a}}</button>
+<button onClick="{{st.pickB}}" style="height: 32px; padding: 0 9px; border: 0; border-radius: 8px; background: {{st.bBg}}; color: {{st.bFg}}; font-family: 'Figtree', sans-serif; font-size: 12.5px; font-weight: 500">{{st.b}}</button>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<nav aria-label="Emplacements" style="display: flex; gap: 2px; padding: 10px 12px 0; overflow-x: auto; flex-shrink: 0">
+<sc-for list="{{rail}}" as="r" hint-placeholder-count="6">
+<sc-if value="{{r.sep}}" hint-placeholder-val="{{ false }}"><span style="width: 1px; align-self: stretch; margin: 10px 6px; background: #DDD0BA; flex-shrink: 0"></span></sc-if>
+<button onClick="{{r.select}}" style="min-width: 68px; height: 56px; padding: 0 6px; border: 0; border-bottom: 2px solid {{r.tabLine}}; background: transparent; color: {{r.tabFg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-family: 'Figtree', sans-serif; font-size: 11.5px; font-weight: 500; flex-shrink: 0">
+<span style="width: 12px; height: 12px; border-radius: 6px; border: 1px {{r.border}} #6B5D52; background: {{r.color}}"></span>
+{{r.label}}
+</button>
+</sc-for>
+</nav>
+
+<div style="padding: 12px 16px 20px; margin-top: auto">
+<button onClick="{{save}}" style="width: 100%; height: 52px; border: 0; border-radius: 12px; background: #6E1F2B; color: #FBF6EC; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.02em">{{saveLabel}}</button>
+</div>
+
+<sc-if value="{{drawerOpen}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end">
+<button onClick="{{close}}" aria-label="Fermer le tiroir" style="position: absolute; inset: 0; border: 0; padding: 0; background: rgba(42, 33, 28, 0.42)"></button>
+<div role="dialog" aria-label="Choisir : {{drawer.label}}" style="position: relative; background: #FBF6EC; border-radius: 22px 22px 0 0; padding: 8px 14px 26px; box-shadow: 0 -10px 30px rgba(42, 33, 28, 0.18)">
+<div style="width: 40px; height: 4px; border-radius: 2px; background: #CDBEA5; margin: 0 auto 4px"></div>
+<div style="display: flex; align-items: center; gap: 2px">
+<button onClick="{{drawer.prev}}" aria-label="Pièce précédente" style="width: 44px; height: 44px; border: 0; background: transparent; color: #6E1F2B; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</button>
+<div style="flex: 1; text-align: center">
+<div style="font-family: 'Libre Caslon Text', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: #6E1F2B">{{drawer.label}}</div>
+<div style="font-family: 'Libre Caslon Text', serif; font-size: 12px; font-style: italic; color: #6B5D52">{{drawer.count}}</div>
+</div>
+<button onClick="{{drawer.next}}" aria-label="Pièce suivante" style="width: 44px; height: 44px; border: 0; background: transparent; color: #6E1F2B; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+</button>
+<button onClick="{{close}}" aria-label="Fermer" style="width: 44px; height: 44px; border: 0; background: transparent; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px">
+<sc-for list="{{drawer.tiles}}" as="t" hint-placeholder-count="4">
+<button onClick="{{t.pick}}" style="display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 104px; padding: 12px 8px; background: #F3EBDD; border: 1.5px solid {{t.ring}}; border-radius: 12px; color: #2A211C; text-align: center">
+<span style="width: 30px; height: 30px; border-radius: 15px; border: 1px {{t.border}} #6B5D52; background: {{t.color}}"></span>
+<span style="font-family: 'Figtree', sans-serif; font-size: 12.5px; font-weight: 600; line-height: 1.25">{{t.name}}</span>
+<span style="font-family: 'Figtree', sans-serif; font-size: 11px; letter-spacing: 0.08em; color: #6B5D52">{{t.code}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; display: flex">
+<nav aria-label="Menu principal" style="position: relative; z-index: 1; width: 290px; height: 100%; box-sizing: border-box; background: #FBF6EC; border-right: 1px solid #DDD0BA; padding: 18px 12px 24px; display: flex; flex-direction: column; gap: 2px">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 0 4px 14px 10px">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 17px; font-weight: 700; letter-spacing: 0.32em; color: #6E1F2B">CABINE</span>
+<button onClick="{{closeMenu}}" aria-label="Fermer le menu" style="width: 44px; height: 44px; border: 0; background: transparent; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+<button onClick="{{closeMenu}}" style="display: flex; align-items: center; height: 48px; padding: 0 12px; border: 0; border-left: 2px solid #6E1F2B; border-radius: 0 10px 10px 0; background: #EADFCB; color: #6E1F2B; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; text-align: left">Composition</button>
+<a href="Catalogue.dc.html" style="display: flex; align-items: center; height: 48px; padding: 0 14px; color: #2A211C; font-size: 15px; font-weight: 500; text-decoration: none">Catalogue</a>
+<a href="Tenues.dc.html" style="display: flex; align-items: center; height: 48px; padding: 0 14px; color: #2A211C; font-size: 15px; font-weight: 500; text-decoration: none">Tenues sauvegardées</a>
+<a href="Filtres.dc.html" style="display: flex; align-items: center; height: 48px; padding: 0 14px; color: #2A211C; font-size: 15px; font-weight: 500; text-decoration: none">Filtres</a>
+<div style="height: 1px; background: #DDD0BA; margin: 10px 12px"></div>
+<a href="Import-CSV.dc.html" style="display: flex; align-items: center; height: 48px; padding: 0 14px; color: #2A211C; font-size: 15px; font-weight: 500; text-decoration: none">Import CSV</a>
+<a href="Synchro.dc.html" style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 14px; color: #2A211C; font-size: 15px; font-weight: 500; text-decoration: none">Synchronisation <span style="font-size: 12px; color: #2F4A3A">À jour</span></a>
+</nav>
+<button onClick="{{closeMenu}}" aria-label="Fermer le menu" style="flex: 1; border: 0; padding: 0; background: rgba(42, 33, 28, 0.42)"></button>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  state = {
+    sel: { manteau: -1, veste: 1, maille: 0, haut: 0, pantalon: 0, chaussures: 0, echarpe: 0, ceinture: 0, cravate: -1, montre: 0, lunettes: 0, chaussettes: 0 },
+    open: null,
+    focus: 'veste',
+    wear: { topOut: false, knitOut: true, rolled: false, colOpen: true },
+    chips: [{ id: 'laine', label: 'Laine', dot: '' }, { id: 'automne', label: 'Automne', dot: '' }, { id: 'bordeaux', label: 'Bordeaux', dot: '#6E2230' }],
+    saved: false
+  };
+
+  data() {
+    const H = { ecru: '#E9DFC7', camel: '#B5884F', marron: '#6B4A33', rouille: '#A4532B', terracotta: '#C0704F', bordeaux: '#6E2230', moutarde: '#C29A3A', olive: '#6F6B3A', sauge: '#9AA58A', foret: '#2F4A3A', petrole: '#2E5560', marine: '#26324A', flanelle: '#8A8780', anthracite: '#3A3A3C' };
+    const main = [
+      { id: 'manteau', label: 'Manteau', items: [['Duffle-coat doublé tartan', 'MAN-01', H.camel], ['Parka kaki', 'MAN-02', H.olive], ['Pardessus marine', 'MAN-03', H.marine]] },
+      { id: 'veste', label: 'Veste', items: [['Blouson daim marron', 'VES-01', H.marron], ['Blazer velours camel', 'VES-02', H.camel], ['Blazer tweed olive', 'VES-03', H.olive]] },
+      { id: 'maille', label: 'Maille', items: [['Pull torsadé bordeaux', 'MAI-01', H.bordeaux], ['Gilet Prince de Galles', 'MAI-02', H.camel], ['Quarter-zip côtelé', 'MAI-03', H.petrole], ['Col V laine sauge', 'MAI-04', H.sauge]] },
+      { id: 'haut', label: 'Haut', items: [['Chemise Oxford écru', 'HAU-01', H.ecru], ['Chemise Prince de Galles', 'HAU-02', H.flanelle], ['Chemise flanelle terracotta', 'HAU-03', H.terracotta]] },
+      { id: 'pantalon', label: 'Pantalon', items: [['Double pli marine', 'PAN-01', H.marine], ['Rayure craie marron', 'PAN-02', H.marron], ['Flanelle grise', 'PAN-03', H.flanelle], ['Velours côtelé olive', 'PAN-04', H.olive]] },
+      { id: 'chaussures', label: 'Chaussures', items: [['Derby marron bout rond', 'CHA-01', H.marron], ['Chukka daim rouille', 'CHA-02', H.rouille], ['Derby anthracite', 'CHA-03', H.anthracite]] }
+    ];
+    const acc = [
+      { id: 'echarpe', label: 'Écharpe', items: [['Écharpe vert forêt', 'ECH-01', H.foret], ['Écharpe tartan rouille', 'ECH-02', H.rouille]] },
+      { id: 'ceinture', label: 'Ceinture', items: [['Ceinture cuir marron', 'CEI-01', H.marron], ['Ceinture tressée camel', 'CEI-02', H.camel]] },
+      { id: 'cravate', label: 'Cravate', items: [['Cravate tricot bordeaux', 'CRA-01', H.bordeaux], ['Cravate laine moutarde', 'CRA-02', H.moutarde]] },
+      { id: 'montre', label: 'Montre', items: [['Montre bracelet camel', 'MON-01', H.camel]] },
+      { id: 'lunettes', label: 'Lunettes', items: [['Monture écaille', 'LUN-01', H.marron]] },
+      { id: 'chaussettes', label: 'Chaussettes', items: [['Chaussettes bordeaux', 'CHT-01', H.bordeaux], ['Chaussettes moutarde', 'CHT-02', H.moutarde]] }
+    ];
+    return { main: main, acc: acc, all: main.concat(acc) };
+  }
+
+  item(id) {
+    const slot = this.data().all.find((x) => x.id === id);
+    const i = this.state.sel[id];
+    return i < 0 ? null : slot.items[i];
+  }
+
+  pick(id, i, close) {
+    this.setState({ sel: Object.assign({}, this.state.sel, { [id]: i }), open: close ? null : this.state.open, saved: false });
+  }
+
+  step(id, d) {
+    const slot = this.data().all.find((x) => x.id === id);
+    const n = slot.items.length + 1;
+    const i = (((this.state.sel[id] + 1 + d) % n) + n) % n - 1;
+    this.pick(id, i, false);
+  }
+
+  setWear(k, v) {
+    this.setState({ wear: Object.assign({}, this.state.wear, { [k]: v }), saved: false });
+  }
+
+  build(T, close) {
+    const s = this.state;
+    const D = this.data();
+    const row = (slot) => {
+      const it = this.item(slot.id);
+      return {
+        id: slot.id, label: slot.label,
+        name: it ? it[0] : 'Aucun', code: it ? it[1] : '—', color: it ? it[2] : 'transparent', border: it ? 'solid' : 'dashed',
+        prev: () => this.step(slot.id, -1), next: () => this.step(slot.id, 1), open: () => this.setState({ open: slot.id, focus: slot.id })
+      };
+    };
+    const main = D.main.map(row);
+    const acc = D.acc.map(row);
+    const g = (id) => { const it = this.item(id); return it ? it[2] : ''; };
+    const has = (id) => !!this.item(id);
+    const w = s.wear;
+    const seg = (key, label, a, b, aVal) => {
+      const on = w[key] === aVal;
+      return {
+        label: label, a: a, b: b,
+        aBg: on ? T.segOn : 'transparent', aFg: on ? T.segOnFg : T.segFg,
+        bBg: on ? 'transparent' : T.segOn, bFg: on ? T.segFg : T.segOnFg,
+        pickA: () => this.setWear(key, aVal), pickB: () => this.setWear(key, !aVal)
+      };
+    };
+    const states = [];
+    if (has('haut')) states.push(seg('topOut', 'Haut', 'Rentré', 'Sorti', false));
+    if (has('maille')) states.push(seg('knitOut', 'Maille', 'Rentrée', 'Sortie', false));
+    if (has('haut') && !has('veste') && !has('manteau')) states.push(seg('rolled', 'Manches', 'Déroulées', 'Relevées', false));
+    if (has('haut') && !has('cravate')) states.push(seg('colOpen', 'Col', 'Ouvert', 'Fermé', true));
+    const av = {
+      coat: g('manteau'), jacket: g('veste'), knit: g('maille'), top: g('haut'), pants: g('pantalon'), shoes: g('chaussures'),
+      scarf: g('echarpe'), belt: g('ceinture'), tie: g('cravate'), watch: g('montre'), glasses: g('lunettes'), socks: g('chaussettes'),
+      topOut: w.topOut, knitIn: !w.knitOut, rolled: w.rolled && !has('veste') && !has('manteau'), colOpen: w.colOpen && !has('cravate')
+    };
+    const openSlot = D.all.find((x) => x.id === s.open);
+    let drawer = { label: '', count: '', tiles: [], prev: () => {}, next: () => {} };
+    if (openSlot) {
+      const cur = s.sel[openSlot.id];
+      const tiles = [{ name: 'Aucun', code: '—', color: 'transparent', border: 'dashed', ring: cur === -1 ? T.ring : 'transparent', pick: () => this.pick(openSlot.id, -1, close) }]
+        .concat(openSlot.items.map((it, i) => ({ name: it[0], code: it[1], color: it[2], border: 'solid', ring: cur === i ? T.ring : 'transparent', pick: () => this.pick(openSlot.id, i, close) })));
+      drawer = { label: openSlot.label, count: openSlot.items.length + ' pièces', tiles: tiles, prev: () => this.step(openSlot.id, -1), next: () => this.step(openSlot.id, 1) };
+    }
+    const chips = s.chips.map((c) => ({ label: c.label, dot: c.dot || 'transparent', dotShow: !!c.dot, remove: () => this.setState({ chips: this.state.chips.filter((x) => x.id !== c.id) }) }));
+    const worn = D.all.filter((x) => has(x.id)).length;
+    return {
+      main: main, acc: acc, states: states, hasStates: states.length > 0, av: av,
+      drawer: drawer, drawerOpen: !!openSlot, drawerClosed: !openSlot, chips: chips,
+      close: () => this.setState({ open: null }), save: () => this.setState({ saved: true }),
+      saveLabel: s.saved ? 'Tenue sauvegardée' : 'Sauvegarder la tenue', worn: worn + ' pièces'
+    };
+  }
+
+  renderVals() {
+    const T = { ink: '#2A211C', muted: '#6B5D52', accent: '#6E1F2B', segOn: '#2A211C', segOnFg: '#FBF6EC', segFg: '#2A211C', ring: '#6E1F2B' };
+    const base = this.build(T, true);
+    const s = this.state;
+    const Y = { manteau: 205, veste: 168, maille: 150, haut: 122, pantalon: 300, chaussures: 422, echarpe: 92, ceinture: 210, cravate: 130, montre: 198, lunettes: 36, chaussettes: 410 };
+    const all = base.main.concat(base.acc);
+    const f = all.find((r) => r.id === s.focus);
+    const idx = all.indexOf(f);
+    const rail = all.map((r) => Object.assign({}, r, {
+      tabFg: r.id === s.focus ? T.accent : T.muted,
+      tabLine: r.id === s.focus ? T.accent : 'transparent',
+      sep: r.id === 'echarpe',
+      select: () => this.setState({ focus: r.id })
+    }));
+    const zy = Math.round(Y[s.focus] * 380 / 460);
+    return Object.assign(base, {
+      menuOpen: !!s.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      rail: rail,
+      focus: { label: f.label, name: f.name, code: f.code, color: f.color, border: f.border, pos: (idx + 1) + ' / 12', prev: f.prev, next: f.next, open: f.open, arrowTop: Math.max(0, Math.min(328, zy - 26)), lineTop: zy }
+    });
+  }
+}
+</script>
+</body>
+</html>

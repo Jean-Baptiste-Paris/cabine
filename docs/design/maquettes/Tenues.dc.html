@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cabine · Tenues sauvegardées</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Figtree:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#6E1F2B}a:hover{color:#4F141E}
+button{cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3EBDD; color: #2A211C; font-family: 'Figtree', sans-serif; display: flex; flex-direction: column">
+
+<header style="display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; padding: 12px 8px 0">
+<a href="D-mobile.dc.html" aria-label="Retour à la composition" style="width: 44px; height: 44px; border-radius: 22px; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</a>
+<div style="display: flex; flex-direction: column; align-items: center">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.28em; color: #6E1F2B; padding-left: 0.28em">TENUES</span>
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 12px; font-style: italic; color: #6B5D52; margin-top: 2px">{{count}}</span>
+</div>
+<span></span>
+</header>
+
+<div style="flex: 1; min-height: 0; overflow-y: auto; padding: 16px 16px 24px; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{outfits}}" as="o" hint-placeholder-count="3">
+<article style="display: flex; gap: 14px; padding: 12px; background: #FBF6EC; border: 1px solid #DDD0BA; border-radius: 16px">
+<div style="width: 76px; height: 156px; flex-shrink: 0; border-radius: 12px; background: #EDE3D1; display: flex; align-items: center; justify-content: center">
+<dc-import name="Avatar" w="64" h="148" coat="{{o.coat}}" jacket="{{o.jacket}}" knit="{{o.knit}}" top="{{o.top}}" pants="{{o.pants}}" shoes="{{o.shoes}}" scarf="{{o.scarf}}" belt="{{o.belt}}" tie="{{o.tie}}" watch="{{o.watch}}" glasses="{{o.glasses}}" socks="{{o.socks}}" skin="#E4D9C5" line="#2A211C" sw="1.6" hint-size="64px,148px"></dc-import>
+</div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<sc-if value="{{o.editing}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="rename-{{o.id}}" style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B5D52">Nouveau nom</label>
+<input id="rename-{{o.id}}" type="text" value="{{draft}}" onChange="{{onDraft}}" style="height: 44px; padding: 0 12px; background: #FFFDF8; border: 1.5px solid #6E1F2B; border-radius: 10px; font-family: 'Libre Caslon Text', serif; font-size: 16px; color: #2A211C; box-sizing: border-box; width: 100%">
+<div style="display: flex; gap: 6px">
+<button onClick="{{o.commit}}" style="flex: 1; height: 40px; border: 0; border-radius: 10px; background: #2A211C; color: #FBF6EC; font-family: 'Figtree', sans-serif; font-size: 13.5px; font-weight: 600">Valider</button>
+<button onClick="{{cancel}}" style="flex: 1; height: 40px; border: 1px solid #CDBEA5; border-radius: 10px; background: transparent; color: #2A211C; font-family: 'Figtree', sans-serif; font-size: 13.5px; font-weight: 500">Annuler</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{o.viewing}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 18px; line-height: 1.2">{{o.name}}</span>
+<span style="font-size: 12.5px; color: #6B5D52">{{o.meta}}</span>
+</div>
+<div style="display: flex; gap: 3px" aria-hidden="true">
+<sc-for list="{{o.swatches}}" as="sw" hint-placeholder-count="6">
+<span style="width: 18px; height: 18px; border-radius: 9px; border: 1px solid #6B5D52; background: {{sw}}"></span>
+</sc-for>
+</div>
+<div style="display: flex; gap: 6px; margin-top: auto">
+<a href="D-mobile.dc.html" style="flex: 1; height: 44px; border-radius: 10px; background: #6E1F2B; color: #FBF6EC; display: flex; align-items: center; justify-content: center; font-size: 13.5px; font-weight: 600; text-decoration: none">Rappeler</a>
+<button onClick="{{o.rename}}" aria-label="Renommer {{o.name}}" style="width: 44px; height: 44px; border: 1px solid #CDBEA5; border-radius: 10px; background: transparent; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path><path d="M13.5 6.5l4 4"></path></svg>
+</button>
+<button onClick="{{o.ask}}" aria-label="Supprimer {{o.name}}" style="width: 44px; height: 44px; border: 1px solid #CDBEA5; border-radius: 10px; background: transparent; color: #6E1F2B; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"></path></svg>
+</button>
+</div>
+</sc-if>
+</div>
+</article>
+</sc-for>
+<sc-if value="{{none}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 60px 24px; text-align: center">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 20px; font-style: italic">Aucune tenue sauvegardée</span>
+<span style="font-size: 13.5px; color: #6B5D52; line-height: 1.5">Composez une tenue puis touchez « Sauvegarder la tenue ».</span>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{confirming}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px">
+<button onClick="{{dismiss}}" aria-label="Annuler la suppression" style="position: absolute; inset: 0; border: 0; padding: 0; background: rgba(42, 33, 28, 0.45)"></button>
+<div role="alertdialog" aria-labelledby="del-title" style="position: relative; width: 100%; background: #FBF6EC; border-radius: 18px; padding: 22px 20px 18px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 16px 40px rgba(42, 33, 28, 0.25)">
+<span id="del-title" style="font-family: 'Libre Caslon Text', serif; font-size: 20px; line-height: 1.25">Supprimer « {{confirmName}} » ?</span>
+<span style="font-size: 14px; color: #6B5D52; line-height: 1.5">La tenue sera retirée de cet appareil et, à la prochaine synchronisation, des autres. Les pièces restent dans le catalogue.</span>
+<div style="display: flex; gap: 8px; margin-top: 8px">
+<button onClick="{{dismiss}}" style="flex: 1; height: 48px; border: 1px solid #CDBEA5; border-radius: 12px; background: transparent; color: #2A211C; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600">Annuler</button>
+<button onClick="{{doDelete}}" style="flex: 1; height: 48px; border: 0; border-radius: 12px; background: #6E1F2B; color: #FBF6EC; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600">Supprimer</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  state = {
+    list: [
+      { id: 'o1', name: 'Bibliothèque d’automne', meta: '5 pièces · 5 accessoires', av: { coat: '', jacket: '#B5884F', knit: '#6E2230', top: '#E9DFC7', pants: '#26324A', shoes: '#6B4A33', scarf: '#2F4A3A', belt: '#6B4A33', tie: '', watch: '#B5884F', glasses: '#6B4A33', socks: '#6E2230' } },
+      { id: 'o2', name: 'Marché du samedi', meta: '5 pièces · 2 accessoires', av: { coat: '#6F6B3A', jacket: '', knit: '#2E5560', top: '#8A8780', pants: '#6F6B3A', shoes: '#A4532B', scarf: '', belt: '', tie: '', watch: '#B5884F', glasses: '', socks: '#C29A3A' } },
+      { id: 'o3', name: 'Réunion client', meta: '4 pièces · 4 accessoires', av: { coat: '', jacket: '#6F6B3A', knit: '', top: '#E9DFC7', pants: '#8A8780', shoes: '#6B4A33', scarf: '', belt: '#6B4A33', tie: '#C29A3A', watch: '#B5884F', glasses: '#6B4A33', socks: '' } },
+      { id: 'o4', name: 'Duffle et velours', meta: '5 pièces · 3 accessoires', av: { coat: '#B5884F', jacket: '', knit: '#6E2230', top: '#C0704F', pants: '#6F6B3A', shoes: '#6B4A33', scarf: '#A4532B', belt: '', tie: '', watch: '', glasses: '#6B4A33', socks: '#6E2230' } }
+    ],
+    editing: null, draft: '', confirm: null
+  };
+  renderVals() {
+    const s = this.state;
+    const outfits = s.list.map((o) => Object.assign({}, o.av, {
+      id: o.id, name: o.name, meta: o.meta,
+      swatches: [o.av.coat, o.av.jacket, o.av.knit, o.av.top, o.av.pants, o.av.shoes].filter((c) => c),
+      editing: s.editing === o.id, viewing: s.editing !== o.id,
+      rename: () => this.setState({ editing: o.id, draft: o.name }),
+      commit: () => this.setState({ list: this.state.list.map((x) => (x.id === o.id ? Object.assign({}, x, { name: this.state.draft || x.name }) : x)), editing: null }),
+      ask: () => this.setState({ confirm: o.id })
+    }));
+    const c = s.list.find((o) => o.id === s.confirm);
+    const n = s.list.length;
+    return {
+      outfits: outfits, none: n === 0, count: n + (n > 1 ? ' tenues' : ' tenue'),
+      draft: s.draft, onDraft: (e) => this.setState({ draft: e.target.value }), cancel: () => this.setState({ editing: null }),
+      confirming: !!c, confirmName: c ? c.name : '',
+      dismiss: () => this.setState({ confirm: null }),
+      doDelete: () => this.setState({ list: this.state.list.filter((o) => o.id !== this.state.confirm), confirm: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

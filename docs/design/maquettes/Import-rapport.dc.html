@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cabine · Rapport d'import</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Figtree:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#6E1F2B}a:hover{color:#4F141E}
+button{cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3EBDD; color: #2A211C; font-family: 'Figtree', sans-serif; display: flex; flex-direction: column">
+
+<header style="display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; padding: 12px 8px 0">
+<a href="Import-CSV.dc.html" aria-label="Retour au choix du fichier" style="width: 44px; height: 44px; border-radius: 22px; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</a>
+<div style="display: flex; flex-direction: column; align-items: center">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.28em; color: #6E1F2B; padding-left: 0.28em">RAPPORT</span>
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 12px; font-style: italic; color: #6B5D52; margin-top: 2px">Étape 2 sur 2 · garde-robe.csv</span>
+</div>
+<span></span>
+</header>
+
+<div style="flex: 1; min-height: 0; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 18px">
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="padding: 16px; border-radius: 16px; background: #FBF6EC; border: 1px solid #DDD0BA; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 36px; line-height: 1">35</span>
+<span style="font-size: 13px; font-weight: 600">pièces importées</span>
+<span style="font-size: 12px; color: #6B5D52">29 nouvelles · 6 mises à jour</span>
+</div>
+<div style="padding: 16px; border-radius: 16px; background: #FBF6EC; border: 1px solid #D9B9BD; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 36px; line-height: 1; color: #6E1F2B">3</span>
+<span style="font-size: 13px; font-weight: 600">lignes rejetées</span>
+<span style="font-size: 12px; color: #6B5D52">À corriger dans le fichier</span>
+</div>
+</div>
+
+<section style="display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-family: 'Libre Caslon Text', serif; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #6E1F2B">Lignes rejetées</h2>
+<div style="background: #FBF6EC; border: 1px solid #DDD0BA; border-radius: 14px; overflow: hidden">
+<sc-for list="{{rejects}}" as="r" hint-placeholder-count="3">
+<div style="display: flex; gap: 12px; padding: 12px 14px; border-top: 1px solid {{r.rule}}">
+<span style="width: 44px; flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: #6B5D52; padding-top: 2px">L. {{r.line}}</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; font-weight: 600; color: #6E1F2B">{{r.reason}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6B5D52; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.raw}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 8px">
+<button onClick="{{toggle}}" aria-expanded="{{open}}" style="display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 0; border: 0; background: transparent; color: #2A211C; text-align: left">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #6E1F2B">Pièces importées</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #6B5D52">{{toggleLabel}}
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{chev}}deg)"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+</button>
+<div style="background: #FBF6EC; border: 1px solid #DDD0BA; border-radius: 14px; overflow: hidden">
+<sc-for list="{{shown}}" as="it" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 6px 14px; border-top: 1px solid {{it.rule}}">
+<span style="width: 24px; height: 24px; border-radius: 12px; flex-shrink: 0; border: 1px solid #6B5D52; background: {{it.color}}"></span>
+<span style="flex: 1; min-width: 0; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{it.name}}</span>
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: {{it.tagFg}}; background: {{it.tagBg}}; padding: 3px 8px; border-radius: 10px">{{it.tag}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+
+<div style="padding: 10px 16px 20px; border-top: 1px solid #DDD0BA; display: flex; gap: 10px">
+<a href="Import-CSV.dc.html" style="height: 52px; padding: 0 18px; border: 1px solid #CDBEA5; border-radius: 12px; color: #2A211C; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; text-decoration: none">Réimporter</a>
+<a href="Catalogue.dc.html" style="flex: 1; height: 52px; border-radius: 12px; background: #6E1F2B; color: #FBF6EC; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; text-decoration: none">Voir le catalogue</a>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  state = { open: false };
+  renderVals() {
+    const rejects = [
+      { line: 12, reason: 'Teinte « kaki clair » hors de la liste', raw: 'MAN-04;Trench;manteau;croisé;kaki clair;coton;;' },
+      { line: 27, reason: 'Emplacement manquant', raw: 'ACC-07;Pochette soie;;;bordeaux;soie;soirée;' },
+      { line: 31, reason: 'Code VES-02 utilisé deux fois dans le fichier', raw: 'VES-02;Veste velours;veste;droite;camel;velours;;' }
+    ].map((r, i) => Object.assign(r, { rule: i === 0 ? 'transparent' : '#E6DBC6' }));
+    const items = [
+      ['Pull torsadé bordeaux', '#6E2230', 'MAJ'], ['Blouson daim marron', '#6B4A33', 'MAJ'], ['Flanelle grise', '#8A8780', 'Nouvelle'],
+      ['Chemise Oxford écru', '#E9DFC7', 'Nouvelle'], ['Duffle-coat doublé tartan', '#B5884F', 'Nouvelle'], ['Velours côtelé olive', '#6F6B3A', 'Nouvelle'],
+      ['Chukka daim rouille', '#A4532B', 'Nouvelle'], ['Quarter-zip côtelé', '#2E5560', 'MAJ']
+    ];
+    const open = this.state.open;
+    const shown = (open ? items : items.slice(0, 4)).map((it, i) => ({
+      name: it[0], color: it[1], tag: it[2] === 'MAJ' ? 'Mise à jour' : 'Nouvelle',
+      tagBg: it[2] === 'MAJ' ? '#EADFCB' : '#E3E6D6', tagFg: '#2A211C', rule: i === 0 ? 'transparent' : '#E6DBC6'
+    }));
+    return {
+      rejects: rejects, shown: shown, open: open,
+      toggleLabel: open ? 'Réduire' : 'Tout voir (35)', chev: open ? 180 : 0,
+      toggle: () => this.setState({ open: !this.state.open })
+    };
+  }
+}
+</script>
+</body>
+</html>

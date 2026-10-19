@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Cabine · Synchronisation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Figtree:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#6E1F2B}a:hover{color:#4F141E}
+button{cursor:pointer}
+input::placeholder{color:#6B5D52}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F3EBDD; color: #2A211C; font-family: 'Figtree', sans-serif; display: flex; flex-direction: column">
+
+<header style="display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; padding: 12px 8px 0">
+<a href="D-mobile.dc.html" aria-label="Retour à la composition" style="width: 44px; height: 44px; border-radius: 22px; color: #2A211C; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+</a>
+<div style="display: flex; flex-direction: column; align-items: center">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 15px; font-weight: 700; letter-spacing: 0.28em; color: #6E1F2B; padding-left: 0.28em">SYNCHRO</span>
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 12px; font-style: italic; color: #6B5D52; margin-top: 2px">Sauvegarde sur GitHub</span>
+</div>
+<span></span>
+</header>
+
+<div style="flex: 1; min-height: 0; overflow-y: auto; padding: 18px 16px 20px; display: flex; flex-direction: column; gap: 22px">
+
+<div role="status" style="display: flex; gap: 14px; padding: 16px; background: #FBF6EC; border: 1px solid {{st.border}}; border-radius: 16px">
+<span style="width: 44px; height: 44px; border-radius: 22px; flex-shrink: 0; background: {{st.iconBg}}; color: {{st.iconFg}}; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{is.ajour}}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></sc-if>
+<sc-if value="{{is.encours}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"></path><path d="M18 3v4h-4M6 21v-4h4"></path></svg></sc-if>
+<sc-if value="{{is.conflit}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v10M17 10v10M7 14a5 5 0 0 0 5 5h5M17 10a5 5 0 0 0-5-5H7"></path></svg></sc-if>
+<sc-if value="{{is.erreur}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 7v6M12 17h.01"></path></svg></sc-if>
+</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'Libre Caslon Text', serif; font-size: 19px; line-height: 1.2">{{st.title}}</span>
+<span style="font-size: 13.5px; color: #6B5D52; line-height: 1.45">{{st.detail}}</span>
+<sc-if value="{{is.conflit}}" hint-placeholder-val="{{ false }}">
+<a href="Conflit.dc.html" style="align-self: flex-start; margin-top: 6px; height: 40px; padding: 0 14px; border-radius: 10px; background: #6E1F2B; color: #FBF6EC; display: inline-flex; align-items: center; font-size: 13.5px; font-weight: 600; text-decoration: none">Résoudre le conflit</a>
+</sc-if>
+</div>
+</div>
+
+<section style="display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Libre Caslon Text', serif; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #6E1F2B">Connexion</h2>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="s-repo" style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B5D52">Dépôt de données</label>
+<input id="s-repo" type="text" placeholder="propriétaire/dépôt" style="height: 48px; padding: 0 14px; background: #FBF6EC; border: 1px solid #CDBEA5; border-radius: 12px; font-family: 'Figtree', sans-serif; font-size: 15px; color: #2A211C; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="s-token" style="font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #6B5D52">Jeton GitHub</label>
+<div style="display: flex; align-items: center; height: 48px; padding: 0 4px 0 14px; background: #FBF6EC; border: 1px solid #CDBEA5; border-radius: 12px">
+<input id="s-token" type="{{tokenType}}" value="github_pat_exemple0000000000" style="flex: 1; min-width: 0; border: 0; background: transparent; font-family: 'Figtree', sans-serif; font-size: 15px; color: #2A211C; outline: none">
+<button onClick="{{toggleShow}}" aria-label="{{showLabel}}" style="width: 44px; height: 44px; border: 0; background: transparent; color: #6B5D52; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+</button>
+</div>
+<span style="font-size: 12.5px; color: #6B5D52; line-height: 1.5">Jeton à accès fin, limité à ce dépôt, avec la permission « Contents » en lecture et écriture. Il reste sur cet appareil.</span>
+</div>
+<div style="display: flex; gap: 10px">
+<button style="flex: 1; height: 48px; border: 1px solid #CDBEA5; border-radius: 12px; background: transparent; color: #2A211C; font-family: 'Figtree', sans-serif; font-size: 14px; font-weight: 600">Enregistrer</button>
+<button style="flex: 1; height: 48px; border: 0; border-radius: 12px; background: transparent; color: #6E1F2B; font-family: 'Figtree', sans-serif; font-size: 14px; font-weight: 600">Oublier le jeton</button>
+</div>
+</section>
+</div>
+
+<div style="padding: 10px 16px 20px; border-top: 1px solid #DDD0BA">
+<button onClick="{{sync}}" style="width: 100%; height: 52px; border: 0; border-radius: 12px; background: {{syncBg}}; color: {{syncFg}}; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600">{{syncLabel}}</button>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"etat":{"editor":"enum","options":["ajour","encours","conflit","erreur"],"default":"ajour"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  state = { show: false, local: null };
+  renderVals() {
+    const e = this.state.local || this.props.etat || 'ajour';
+    const S = {
+      ajour: { title: 'À jour', detail: 'Dernière synchronisation aujourd’hui à 09:42. Rien à envoyer.', border: '#DDD0BA', iconBg: '#E3E6D6', iconFg: '#2F4A3A' },
+      encours: { title: 'Synchronisation…', detail: 'Envoi des modifications de cet appareil vers le dépôt.', border: '#DDD0BA', iconBg: '#EADFCB', iconFg: '#2A211C' },
+      conflit: { title: 'Conflit à résoudre', detail: 'Les données ont changé ici et sur un autre appareil depuis la dernière synchronisation.', border: '#D9B9BD', iconBg: '#F1DEDF', iconFg: '#6E1F2B' },
+      erreur: { title: 'Échec de la synchronisation', detail: 'GitHub a refusé le jeton (401). Vérifiez qu’il n’a pas expiré et qu’il donne accès au dépôt.', border: '#D9B9BD', iconBg: '#F1DEDF', iconFg: '#6E1F2B' }
+    };
+    const busy = e === 'encours';
+    return {
+      st: S[e],
+      is: { ajour: e === 'ajour', encours: busy, conflit: e === 'conflit', erreur: e === 'erreur' },
+      tokenType: this.state.show ? 'text' : 'password',
+      showLabel: this.state.show ? 'Masquer le jeton' : 'Afficher le jeton',
+      toggleShow: () => this.setState({ show: !this.state.show }),
+      syncLabel: busy ? 'Synchronisation en cours…' : 'Synchroniser maintenant',
+      syncBg: busy ? '#E6DBC6' : '#6E1F2B', syncFg: busy ? '#6B5D52' : '#FBF6EC',
+      sync: () => this.setState({ local: busy ? 'ajour' : 'encours' })
+    };
+  }
+}
+</script>
+</body>
+</html>
